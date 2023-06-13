@@ -30,8 +30,31 @@ var books = [
       year: 1990,
       author: "Schriftsteller aus der Vergangenheit"
     }
-  ]
+]
 
+var lends = [
+  {
+    id: 1,
+    customer_id: 1,
+    isbn: "192837509842034927",
+    borrowed_at: "2021-03-01",
+    returned_at: "2021-03-08"
+  },
+  {
+    id: 2,
+    customer_id: 2,
+    isbn: "1975092834052398527",
+    borrowed_at: "2021-03-01",
+    returned_at: "2021-03-08"
+  },
+  {
+    id: 3,
+    customer_id: 3,
+    isbn: "1923749238797825427",
+    borrowed_at: "2021-03-01",
+    returned_at: "2021-03-08"
+  }
+]
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -71,7 +94,34 @@ router.delete('/books/:isbn', function (req, res, next) {
   res.send(JSON.stringify(books))
 });
 
+router.get('/lends', function (req, res, next) {
+  res.send(JSON.stringify(lends))
+});
 
+router.post('/lends', function (req, res, next) {
+  let lend = req.body
+  lends.push(lend)
+  res.send(JSON.stringify(lends))
+});
+
+router.get('/lends/:id', function (req, res, next) {
+  const id = req.params.id
+
+  res.send(lends.filter((lend) => lend.id == id)[0])
+});
+
+router.patch('/lends/:id', function (req, res, next) {
+  const newLend = req.body
+  const id = req.params.id
+
+  oldLend = lends.filter((lend) => lend.id == id)[0]
+
+  for (const [key, value] of Object.entries(newLend)) {
+    oldLend[key] = value
+  }
+
+  res.send(oldLend)
+});
 
 
 
