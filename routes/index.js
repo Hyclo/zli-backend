@@ -1,9 +1,16 @@
 var express = require('express');
 var router = express.Router();
+const {resolve} = require('path');
+
+const absolutePath = resolve('./public/files/swagger-output.json');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
    res.render('index', { title: 'Express' });
+});
+
+router.get('/swagger', function(req,res, next) {
+   res.sendFile(absolutePath)
 });
 
 /*
@@ -219,22 +226,28 @@ router.delete('/name', function (req, res, next) {
 router.post('/login', function (req, res, next) {
    let user = req.body;
 
-   if (user.email == 'desk@library.com' && user.password == 'm295') {
+   if (user.email == 'desk@library.com' && user.password == 'SuPeRsTrOnGpAsSwOrD') {
       res.cookie("I'm a Cookie", {
          username: user.password,
          email: user.email,
          httpOnly: true,
       });
 
-      res.send('Cookie set');
+      res.status(201).send('Cookie set');
    } else {
       res.status(401).send('Wrong credentials');
    }
 });
 
-router.post('/logout', function (req, res, next) {
-   res.clearCookie("I'm a Cookie");
-   res.status(204).send('Cookie deleted');
+router.delete('/logout', function (req, res, next) {
+   let cookies = req.cookies;
+
+   if (cookies["I'm a Cookie"]) {
+      res.clearCookie("I'm a Cookie");
+      res.status(204).send('Cookie deleted');
+   } else {
+      res.status(401).send('No Cookie');
+   }
 });
 
 router.get('/verify', function (req, res, next) {

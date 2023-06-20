@@ -5,7 +5,7 @@
     "description": "API for a library",
     "version": "1.0.0"
   },
-  "host": "localhost:4200",
+  "host": "localhost:3000",
   "basePath": "/",
   "schemes": [
     "http"
@@ -185,8 +185,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "201": {
+            "description": "Created"
           },
           "401": {
             "description": "Unauthorized"
@@ -195,12 +195,15 @@
       }
     },
     "/logout": {
-      "post": {
+      "delete": {
         "description": "",
         "parameters": [],
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
           }
         }
       }
@@ -215,6 +218,17 @@
           },
           "401": {
             "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/users/": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
