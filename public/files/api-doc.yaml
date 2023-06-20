@@ -1,0 +1,160 @@
+swagger: '2.0'
+info:
+  title: Libraray API
+  description: API for a library, with some extras
+  version: 1.0.0
+host: localhost:4200
+basePath: /
+schemes:
+  - http
+paths:
+  /:
+    get:
+      description: 'nothing, just a page'
+      parameters: []
+      responses: {}
+  /books:
+    get:
+      description: 'returns all books'
+      parameters: []
+      responses:
+        '200':
+          description: OK
+    post:
+      description: 'adds a new book'
+      parameters: []
+      responses:
+        '200':
+          description: OK
+  /books/{isbn}:
+    get:
+      description: 'returns a specific book, with the correlationg isbn'
+      parameters:
+        - name: isbn
+          in: path
+          required: true
+          type: string
+      responses: {}
+    put:
+      description: 'replaces a whole book'
+      parameters:
+        - name: isbn
+          in: path
+          required: true
+          type: string
+      responses: {}
+    delete:
+      description: 'deletes a book'
+      parameters:
+        - name: isbn
+          in: path
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+  /lends:
+    get:
+      description: 'returns all lends'
+      parameters: []
+      responses:
+        '200':
+          description: OK
+    post:
+      description: 'adds a new lend'
+      parameters: []
+      responses:
+        '200':
+          description: OK
+  /lends/{id}:
+    get:
+      description: 'returns a specific lend with the correlating id'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+      responses: {}
+    patch:
+      description: 'replaces single or more paramters from a lend'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+      responses: {}
+  /now:
+    get:
+      description: 'returns the current time'
+      parameters:
+        - name: timezone
+          in: query
+          type: string
+      responses: {}
+  /zli:
+    get:
+      description: 'redirects the user to the https://moodle.zli.ch domain'
+      parameters: []
+      responses: {}
+  /name:
+    get:
+      description: 'returns one random name'
+      parameters: []
+      responses:
+        '200':
+          description: OK
+    post:
+      description: 'adds one name'
+      parameters:
+        - name: body
+          in: body
+          schema:
+            type: object
+            properties:
+              name:
+                example: any
+      responses: {}
+    delete:
+      description: 'deletes one name'
+      parameters:
+        - name: name
+          in: query
+          type: string
+        - name: body
+          in: body
+          schema:
+            type: object
+            properties:
+              name:
+                example: any
+      responses:
+        '204':
+          description: No Content
+        '500':
+          description: Internal Server Error
+  /names:
+    get:
+      description: 'returns all names'
+      parameters: []
+      responses: {}
+  /html:
+    get:
+      description: 'returns an html'
+      parameters: []
+      responses:
+        '200':
+          description: OK
+  /xml:
+    get:
+      description: 'returns a xml'
+      parameters: []
+      responses:
+        '200':
+          description: OK
+  /image:
+    get:
+      description: 'returns a image of a grandmother with pistol'
+      parameters: []
+      responses:
+        '200':
+          description: OK
